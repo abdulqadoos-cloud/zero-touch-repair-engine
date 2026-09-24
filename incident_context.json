@@ -1,0 +1,5 @@
+{
+  "error": "KeyError: 'score'",
+  "traceback": "File \"app/calculator.py\", line 7, in process_user_data\n    raw_score = data[\"score\"]\nKeyError: 'score'",
+  "suggested_file": "app/calculator.py"
+}
