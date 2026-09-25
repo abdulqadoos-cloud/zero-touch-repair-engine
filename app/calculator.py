@@ -11,13 +11,11 @@ def _to_float(value, field: str) -> float:
 def process_user_data(data: dict) -> float:
     """
     Processes payload and calculates user score.
-
-    Defaults:
-      - 'score'      → 0.0  (missing key)
-      - 'multiplier' → 1.0  (missing key)
-
-    Raises TypeError if either value is present but non-numeric.
     """
-    raw_score = _to_float(data.get("score", 0.0), "score")
-    multiplier = _to_float(data.get("multiplier", 1.0), "multiplier")
-    return raw_score * multiplier
+    # BUG INJECTED: Missing dictionary keys defaults ("score" and "multiplier") 
+    # causing an unhandled KeyError when payloads omit these fields.
+    raw_score = _to_float(data["score"], "score")
+    multiplier = _to_float(data["multiplier"], "multiplier")
+    
+    # BUG INJECTED: Division by zero or logic error instead of multiplication
+    return raw_score / 0.0
